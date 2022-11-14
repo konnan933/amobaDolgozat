@@ -5,14 +5,13 @@
 package view;
 
 import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JRadioButton;
 
 public class Amoba extends javax.swing.JFrame {
 
@@ -63,7 +62,6 @@ public class Amoba extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(410, 350));
 
         jTabbedPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.BOTTOM));
 
@@ -120,24 +118,24 @@ public class Amoba extends javax.swing.JFrame {
         jatekPanel.setLayout(new javax.swing.BoxLayout(jatekPanel, javax.swing.BoxLayout.X_AXIS));
 
         amobaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Amőba"));
-        amobaPanel.setLayout(new java.awt.GridLayout());
+        amobaPanel.setLayout(new java.awt.GridLayout(1, 0));
         jatekPanel.add(amobaPanel);
 
         amobaSettingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Beállítás"));
 
         buttonGroup2.add(xRadioButton);
         xRadioButton.setText("\"X\" kezd");
-        xRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                xRadioButtonStateChanged(evt);
+        xRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                radioButtonHandler(evt);
             }
         });
 
         buttonGroup2.add(oRadioButton);
         oRadioButton.setText("\"O\" kezd");
-        oRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                oRadioButtonStateChanged(evt);
+        oRadioButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                radioButtonHandler(evt);
             }
         });
 
@@ -232,17 +230,13 @@ public class Amoba extends javax.swing.JFrame {
     private void palyaMeretListaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_palyaMeretListaMouseReleased
         //valamiért csak ha ujra méretezi az ablakot akkor frissül
         amobaGeneralas();
+        
     }//GEN-LAST:event_palyaMeretListaMouseReleased
 
-    private void oRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_oRadioButtonStateChanged
-        kezdoBetu = Character.toString(xRadioButton.getText().charAt(1));
-        System.out.println(kezdoBetu);
-    }//GEN-LAST:event_oRadioButtonStateChanged
-
-    private void xRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_xRadioButtonStateChanged
-        kezdoBetu = Character.toString(oRadioButton.getText().charAt(1));
-        System.out.println(kezdoBetu);
-    }//GEN-LAST:event_xRadioButtonStateChanged
+    private void radioButtonHandler(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radioButtonHandler
+        JRadioButton rButton = (JRadioButton)evt.getSource();
+        kezdoBetu = Character.toString(rButton.getText().charAt(1));
+    }//GEN-LAST:event_radioButtonHandler
    
     private void amobaGeneralas(){
         amobaPanel.removeAll();
@@ -253,7 +247,9 @@ public class Amoba extends javax.swing.JFrame {
         }
         GridLayout layout = new GridLayout(meret, meret,5,5);
         amobaPanel.setLayout(layout);
+        pack();
     }
+    
     
     private void alapAllapot() {
         Color alapHatter = new Color(200, 218, 235);
