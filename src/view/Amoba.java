@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 public class Amoba extends javax.swing.JFrame {
@@ -49,15 +50,18 @@ public class Amoba extends javax.swing.JFrame {
         palyaMeretLista = new javax.swing.JList<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        ujraMenuItem = new javax.swing.JMenuItem();
+        exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GUI- OOP 1. Dolgozat");
 
         jTabbedPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.BOTTOM));
 
@@ -183,15 +187,34 @@ public class Amoba extends javax.swing.JFrame {
 
         jMenu1.setText("Program");
 
-        jMenuItem3.setText("Újra");
-        jMenu1.add(jMenuItem3);
+        ujraMenuItem.setText("Újra");
+        ujraMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ujraMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(ujraMenuItem);
 
-        jMenuItem2.setText("Kilépés");
-        jMenu1.add(jMenuItem2);
+        exitMenuItem.setText("Kilépés");
+        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(exitMenuItem);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Játék elrendezés");
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("vizszintes");
+        jMenu2.add(jRadioButtonMenuItem1);
+
+        jRadioButtonMenuItem2.setSelected(true);
+        jRadioButtonMenuItem2.setText("fuggoleges");
+        jMenu2.add(jRadioButtonMenuItem2);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -209,6 +232,8 @@ public class Amoba extends javax.swing.JFrame {
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleName("pinAmoba");
 
         pack();
         setLocationRelativeTo(null);
@@ -232,6 +257,21 @@ public class Amoba extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_shuffleCheckBoxItemStateChanged
 
+    private void ujraMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ujraMenuItemActionPerformed
+        amobaGeneralas();
+        shuffleCheckBox.setSelected(false);
+    }//GEN-LAST:event_ujraMenuItemActionPerformed
+
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        kiAkarELepni();
+    }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void kiAkarELepni(){
+        int valasz = JOptionPane.showConfirmDialog(amobaPanel, "Biztos ki akar lépni?", "kilépés", JOptionPane.YES_NO_OPTION, 1 );
+        if(valasz == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }
     private void amobaGeneralas() {
         amobaPanel.removeAll();
         String kijelolt = palyaMeretLista.getSelectedValue();
@@ -320,12 +360,13 @@ public class Amoba extends javax.swing.JFrame {
     private javax.swing.JPanel amobaSettingsPanel;
     private javax.swing.JPanel bejelntkezesPanel;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
@@ -337,6 +378,7 @@ public class Amoba extends javax.swing.JFrame {
     private javax.swing.JPanel pinPanel;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JCheckBox shuffleCheckBox;
+    private javax.swing.JMenuItem ujraMenuItem;
     private javax.swing.JRadioButton xRadioButton;
     // End of variables declaration//GEN-END:variables
 }
