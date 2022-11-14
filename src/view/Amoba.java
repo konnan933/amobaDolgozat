@@ -5,6 +5,8 @@
 package view;
 
 import java.awt.Color;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -35,6 +37,9 @@ public class Amoba extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         bejelntkezesPanel = new javax.swing.JPanel();
         pinPanel = new javax.swing.JPanel();
@@ -45,11 +50,19 @@ public class Amoba extends javax.swing.JFrame {
         jatekPanel = new javax.swing.JPanel();
         amobaPanel = new javax.swing.JPanel();
         amobaSettingsPanel = new javax.swing.JPanel();
+        xRadioButton = new javax.swing.JRadioButton();
+        oRadioButton = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        palyaMeretLista = new javax.swing.JList<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(410, 350));
@@ -109,31 +122,56 @@ public class Amoba extends javax.swing.JFrame {
         jatekPanel.setLayout(new javax.swing.BoxLayout(jatekPanel, javax.swing.BoxLayout.X_AXIS));
 
         amobaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Amőba"));
-
-        javax.swing.GroupLayout amobaPanelLayout = new javax.swing.GroupLayout(amobaPanel);
-        amobaPanel.setLayout(amobaPanelLayout);
-        amobaPanelLayout.setHorizontalGroup(
-            amobaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 194, Short.MAX_VALUE)
-        );
-        amobaPanelLayout.setVerticalGroup(
-            amobaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 221, Short.MAX_VALUE)
-        );
-
+        amobaPanel.setLayout(new java.awt.GridLayout());
         jatekPanel.add(amobaPanel);
 
         amobaSettingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Beállítás"));
+
+        buttonGroup2.add(xRadioButton);
+        xRadioButton.setText("\"X\" kezd");
+
+        buttonGroup2.add(oRadioButton);
+        oRadioButton.setText("\"O\" kezd");
+
+        palyaMeretLista.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "3*3", "4*4", "5*5",};
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        palyaMeretLista.setSelectedIndex(0);
+        palyaMeretLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                palyaMeretListaMouseReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(palyaMeretLista);
 
         javax.swing.GroupLayout amobaSettingsPanelLayout = new javax.swing.GroupLayout(amobaSettingsPanel);
         amobaSettingsPanel.setLayout(amobaSettingsPanelLayout);
         amobaSettingsPanelLayout.setHorizontalGroup(
             amobaSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 194, Short.MAX_VALUE)
+            .addGroup(amobaSettingsPanelLayout.createSequentialGroup()
+                .addGroup(amobaSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(amobaSettingsPanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(amobaSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(oRadioButton)
+                            .addComponent(xRadioButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(amobaSettingsPanelLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         amobaSettingsPanelLayout.setVerticalGroup(
             amobaSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 221, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, amobaSettingsPanelLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(xRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(oRadioButton)
+                .addGap(35, 35, 35))
         );
 
         jatekPanel.add(amobaSettingsPanel);
@@ -166,7 +204,7 @@ public class Amoba extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,8 +221,19 @@ public class Amoba extends javax.swing.JFrame {
         //System.out.println(gombok[0].getText());
     }//GEN-LAST:event_shuffleCheckBoxStateChanged
 
+    private void palyaMeretListaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_palyaMeretListaMouseReleased
+        amobaPanel.removeAll();
+        String kijelolt = palyaMeretLista.getSelectedValue();
+        int meret = (int)kijelolt.charAt(0)-'0';
+        for (int i = 0; i < meret*meret; i++) {
+            amobaPanel.add(new JButton());
+        }
+        GridLayout layout = new GridLayout(meret, meret,5,5);
+        amobaPanel.setLayout(layout);
+    }//GEN-LAST:event_palyaMeretListaMouseReleased
+
     private void alapAllapot() {
-        Color alapHatter = new Color(200,218,235);
+        Color alapHatter = new Color(200, 218, 235);
         for (int i = 0; i < gombok.length; i++) {
             gombok[i].setText(pinSzamok[i]);
             gombok[i].setBackground(alapHatter);
@@ -204,14 +253,14 @@ public class Amoba extends javax.swing.JFrame {
             gombok[i].setText(keveresLista.get(i));
         }
     }
-    
+
     class GombLenyomas implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            JButton gomb = (JButton)e.getSource();
-            kodTextfield.setText(kodTextfield.getText()+gomb.getText());
+            JButton gomb = (JButton) e.getSource();
+            kodTextfield.setText(kodTextfield.getText() + gomb.getText());
             gomb.setBackground(Color.CYAN);
-        }               
+        }
     }
 
     private void pinGombGenralas() {
@@ -221,23 +270,31 @@ public class Amoba extends javax.swing.JFrame {
             pinPanel.add(gombok[i]);
         }
     }
-    
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel amobaPanel;
     private javax.swing.JPanel amobaSettingsPanel;
     private javax.swing.JPanel bejelntkezesPanel;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel jatekPanel;
     private javax.swing.JTextField kodTextfield;
+    private javax.swing.JRadioButton oRadioButton;
+    private javax.swing.JList<String> palyaMeretLista;
     private javax.swing.JPanel pinPanel;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JCheckBox shuffleCheckBox;
+    private javax.swing.JRadioButton xRadioButton;
     // End of variables declaration//GEN-END:variables
 }
