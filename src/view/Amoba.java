@@ -184,9 +184,9 @@ public class Amoba extends javax.swing.JFrame {
     }//GEN-LAST:event_shuffleCheckBoxStateChanged
 
     private void alapAllapot() {
-        Color alapHatter = new Color(70,73,75);
+        Color alapHatter = new Color(200,218,235);
         for (int i = 0; i < gombok.length; i++) {
-            gombok[i] = new JButton(pinSzamok[i]);
+            gombok[i].setText(pinSzamok[i]);
             gombok[i].setBackground(alapHatter);
         }
         kodTextfield.setText("");
@@ -204,18 +204,15 @@ public class Amoba extends javax.swing.JFrame {
             gombok[i].setText(keveresLista.get(i));
         }
     }
+    
     class GombLenyomas implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             JButton gomb = (JButton)e.getSource();
             kodTextfield.setText(kodTextfield.getText()+gomb.getText());
             gomb.setBackground(Color.CYAN);
-        }
-            
-        
+        }               
     }
-        
-    
 
     private void pinGombGenralas() {
         for (int i = 0; i < gombok.length; i++) {
