@@ -280,6 +280,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="&quot;X&quot; kezd"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="xRadioButtonStateChanged"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="oRadioButton">
                   <Properties>
@@ -288,6 +291,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="&quot;O&quot; kezd"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="oRadioButtonStateChanged"/>
+                  </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
                   <AuxValues>

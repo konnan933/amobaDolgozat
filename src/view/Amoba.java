@@ -14,18 +14,16 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.JButton;
 
-/**
- *
- * @author dervalics.a.laszlo
- */
 public class Amoba extends javax.swing.JFrame {
 
     private String[] pinSzamok = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
     private JButton[] gombok = new JButton[10];
+    String kezdoBetu = "";
 
     public Amoba() {
         initComponents();
         pinGombGenralas();
+        amobaGeneralas();
     }
 
     /**
@@ -129,9 +127,19 @@ public class Amoba extends javax.swing.JFrame {
 
         buttonGroup2.add(xRadioButton);
         xRadioButton.setText("\"X\" kezd");
+        xRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                xRadioButtonStateChanged(evt);
+            }
+        });
 
         buttonGroup2.add(oRadioButton);
         oRadioButton.setText("\"O\" kezd");
+        oRadioButton.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                oRadioButtonStateChanged(evt);
+            }
+        });
 
         palyaMeretLista.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "3*3", "4*4", "5*5",};
@@ -222,6 +230,21 @@ public class Amoba extends javax.swing.JFrame {
     }//GEN-LAST:event_shuffleCheckBoxStateChanged
 
     private void palyaMeretListaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_palyaMeretListaMouseReleased
+        //valamiért csak ha ujra méretezi az ablakot akkor frissül
+        amobaGeneralas();
+    }//GEN-LAST:event_palyaMeretListaMouseReleased
+
+    private void oRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_oRadioButtonStateChanged
+        kezdoBetu = Character.toString(xRadioButton.getText().charAt(1));
+        System.out.println(kezdoBetu);
+    }//GEN-LAST:event_oRadioButtonStateChanged
+
+    private void xRadioButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_xRadioButtonStateChanged
+        kezdoBetu = Character.toString(oRadioButton.getText().charAt(1));
+        System.out.println(kezdoBetu);
+    }//GEN-LAST:event_xRadioButtonStateChanged
+   
+    private void amobaGeneralas(){
         amobaPanel.removeAll();
         String kijelolt = palyaMeretLista.getSelectedValue();
         int meret = (int)kijelolt.charAt(0)-'0';
@@ -230,8 +253,8 @@ public class Amoba extends javax.swing.JFrame {
         }
         GridLayout layout = new GridLayout(meret, meret,5,5);
         amobaPanel.setLayout(layout);
-    }//GEN-LAST:event_palyaMeretListaMouseReleased
-
+    }
+    
     private void alapAllapot() {
         Color alapHatter = new Color(200, 218, 235);
         for (int i = 0; i < gombok.length; i++) {
