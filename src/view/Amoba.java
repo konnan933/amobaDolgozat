@@ -16,8 +16,9 @@ import javax.swing.JRadioButton;
 
 public class Amoba extends javax.swing.JFrame {
 
-    private String[] pinSzamok = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
-    private JButton[] gombok = new JButton[10];
+    private final String[] pinSzamok = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+    private final JButton[] gombok = new JButton[10];
+    private Color alapHatter = new Color(0,0,0);
     String kezdoBetu = "X";
 
     public Amoba() {
@@ -70,9 +71,9 @@ public class Amoba extends javax.swing.JFrame {
         settingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Beállítás"));
 
         shuffleCheckBox.setText("kever");
-        shuffleCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                shuffleCheckBoxStateChanged(evt);
+        shuffleCheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                shuffleCheckBoxItemStateChanged(evt);
             }
         });
 
@@ -213,22 +214,23 @@ public class Amoba extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void shuffleCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_shuffleCheckBoxStateChanged
-        if (shuffleCheckBox.isSelected()) {
-            pinKeveres();
-        } else {
-            alapAllapot();
-        }
-    }//GEN-LAST:event_shuffleCheckBoxStateChanged
-
     private void palyaMeretListaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_palyaMeretListaMouseReleased
         amobaGeneralas();
+        
     }//GEN-LAST:event_palyaMeretListaMouseReleased
 
     private void radioButtonHandler(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radioButtonHandler
         JRadioButton rButton = (JRadioButton) evt.getSource();
         kezdoBetu = Character.toString(rButton.getText().charAt(1));
     }//GEN-LAST:event_radioButtonHandler
+
+    private void shuffleCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_shuffleCheckBoxItemStateChanged
+        if (shuffleCheckBox.isSelected()) {
+            pinKeveres();
+        } else {
+            alapAllapot();
+        }
+    }//GEN-LAST:event_shuffleCheckBoxItemStateChanged
 
     private void amobaGeneralas() {
         amobaPanel.removeAll();
@@ -252,8 +254,7 @@ public class Amoba extends javax.swing.JFrame {
         return null;
     }
 
-    private void alapAllapot() {
-        Color alapHatter = new Color(200, 218, 235);
+    private void alapAllapot() { 
         for (int i = 0; i < gombok.length; i++) {
             gombok[i].setText(pinSzamok[i]);
             gombok[i].setBackground(alapHatter);
@@ -273,24 +274,34 @@ public class Amoba extends javax.swing.JFrame {
     }
     class GombAmobaLenyomas implements ActionListener {
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             JButton gomb = (JButton) e.getSource();
             gomb.setText(kezdoBetu);
             gomb.removeActionListener(this);
             if(kezdoBetu.equals("X")){
                 kezdoBetu = "O";
+                oRadioButton.setEnabled(true);
+                oRadioButton.setSelected(true);
+                xRadioButton.setEnabled(false);
             }else{
+                oRadioButton.setEnabled(false);
+                xRadioButton.setSelected(true);
+                xRadioButton.setEnabled(true);
                 kezdoBetu = "X";
             }
         }
     }
 
     class GombPinLenyomas implements ActionListener {
+        
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             JButton gomb = (JButton) e.getSource();
             kodTextfield.setText(kodTextfield.getText() + gomb.getText());
             gomb.setBackground(Color.CYAN);
+            
         }
     }
 
@@ -300,6 +311,7 @@ public class Amoba extends javax.swing.JFrame {
             gombok[i].addActionListener(new GombPinLenyomas());
             pinPanel.add(gombok[i]);
         }
+           alapHatter = gombok[0].getBackground();
     }
 
 
