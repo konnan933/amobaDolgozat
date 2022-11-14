@@ -260,6 +260,8 @@ public class Amoba extends javax.swing.JFrame {
     private void ujraMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ujraMenuItemActionPerformed
         amobaGeneralas();
         shuffleCheckBox.setSelected(false);
+        oRadioButton.setEnabled(true);
+        xRadioButton.setEnabled(true);
     }//GEN-LAST:event_ujraMenuItemActionPerformed
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
