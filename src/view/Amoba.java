@@ -4,6 +4,12 @@
  */
 package view;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.JButton;
 
 /**
@@ -11,10 +17,10 @@ import javax.swing.JButton;
  * @author dervalics.a.laszlo
  */
 public class Amoba extends javax.swing.JFrame {
-    
-    private String[] pinSzamok = {"1","2","3","4","5","6","7","8","9","0"};
-    private JButton[] gombok  = new JButton[10]; 
-    
+
+    private String[] pinSzamok = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+    private JButton[] gombok = new JButton[10];
+
     public Amoba() {
         initComponents();
         pinGombGenralas();
@@ -30,78 +36,41 @@ public class Amoba extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jatekPanel = new javax.swing.JPanel();
-        amobaPanel = new javax.swing.JPanel();
-        amobaSettingsPanel = new javax.swing.JPanel();
         bejelntkezesPanel = new javax.swing.JPanel();
         pinPanel = new javax.swing.JPanel();
         settingsPanel = new javax.swing.JPanel();
         shuffleCheckBox = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         kodTextfield = new javax.swing.JTextField();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jatekPanel = new javax.swing.JPanel();
+        amobaPanel = new javax.swing.JPanel();
+        amobaSettingsPanel = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(410, 350));
 
         jTabbedPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.BOTTOM));
 
-        jatekPanel.setPreferredSize(new java.awt.Dimension(410, 350));
-        jatekPanel.setLayout(new javax.swing.BoxLayout(jatekPanel, javax.swing.BoxLayout.X_AXIS));
-
-        amobaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Amőba"));
-
-        javax.swing.GroupLayout amobaPanelLayout = new javax.swing.GroupLayout(amobaPanel);
-        amobaPanel.setLayout(amobaPanelLayout);
-        amobaPanelLayout.setHorizontalGroup(
-            amobaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 188, Short.MAX_VALUE)
-        );
-        amobaPanelLayout.setVerticalGroup(
-            amobaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 228, Short.MAX_VALUE)
-        );
-
-        jatekPanel.add(amobaPanel);
-
-        amobaSettingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Beállítás"));
-
-        javax.swing.GroupLayout amobaSettingsPanelLayout = new javax.swing.GroupLayout(amobaSettingsPanel);
-        amobaSettingsPanel.setLayout(amobaSettingsPanelLayout);
-        amobaSettingsPanelLayout.setHorizontalGroup(
-            amobaSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 188, Short.MAX_VALUE)
-        );
-        amobaSettingsPanelLayout.setVerticalGroup(
-            amobaSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 228, Short.MAX_VALUE)
-        );
-
-        jatekPanel.add(amobaSettingsPanel);
-
-        jTabbedPane2.addTab("Játék", jatekPanel);
-
         bejelntkezesPanel.setPreferredSize(new java.awt.Dimension(410, 350));
         bejelntkezesPanel.setLayout(new java.awt.GridLayout(1, 0, 20, 20));
 
         pinPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Pin kód"));
-
-        javax.swing.GroupLayout pinPanelLayout = new javax.swing.GroupLayout(pinPanel);
-        pinPanel.setLayout(pinPanelLayout);
-        pinPanelLayout.setHorizontalGroup(
-            pinPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 178, Short.MAX_VALUE)
-        );
-        pinPanelLayout.setVerticalGroup(
-            pinPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 228, Short.MAX_VALUE)
-        );
-
+        pinPanel.setLayout(new java.awt.GridLayout(4, 3, 5, 5));
         bejelntkezesPanel.add(pinPanel);
 
         settingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Beállítás"));
 
         shuffleCheckBox.setText("kever");
+        shuffleCheckBox.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                shuffleCheckBoxStateChanged(evt);
+            }
+        });
 
         jLabel1.setText("kód:");
 
@@ -112,7 +81,7 @@ public class Amoba extends javax.swing.JFrame {
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(kodTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                    .addComponent(kodTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -125,7 +94,7 @@ public class Amoba extends javax.swing.JFrame {
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(shuffleCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(kodTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,56 +105,137 @@ public class Amoba extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Bejelntkezés", bejelntkezesPanel);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 166, Short.MAX_VALUE)
+        jatekPanel.setPreferredSize(new java.awt.Dimension(410, 350));
+        jatekPanel.setLayout(new javax.swing.BoxLayout(jatekPanel, javax.swing.BoxLayout.X_AXIS));
+
+        amobaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Amőba"));
+
+        javax.swing.GroupLayout amobaPanelLayout = new javax.swing.GroupLayout(amobaPanel);
+        amobaPanel.setLayout(amobaPanelLayout);
+        amobaPanelLayout.setHorizontalGroup(
+            amobaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 194, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
+        amobaPanelLayout.setVerticalGroup(
+            amobaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 221, Short.MAX_VALUE)
         );
+
+        jatekPanel.add(amobaPanel);
+
+        amobaSettingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Beállítás"));
+
+        javax.swing.GroupLayout amobaSettingsPanelLayout = new javax.swing.GroupLayout(amobaSettingsPanel);
+        amobaSettingsPanel.setLayout(amobaSettingsPanelLayout);
+        amobaSettingsPanelLayout.setHorizontalGroup(
+            amobaSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 194, Short.MAX_VALUE)
+        );
+        amobaSettingsPanelLayout.setVerticalGroup(
+            amobaSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 221, Short.MAX_VALUE)
+        );
+
+        jatekPanel.add(amobaSettingsPanel);
+
+        jTabbedPane2.addTab("Játék", jatekPanel);
+
+        jMenu1.setText("Program");
+
+        jMenuItem3.setText("Újra");
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem2.setText("Kilépés");
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Játék elrendezés");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(16, 16, 16)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pinGombGenralas(){
+    private void shuffleCheckBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_shuffleCheckBoxStateChanged
+        //System.out.println(shuffleCheckBox.isSelected());
+        if (shuffleCheckBox.isSelected()) {
+            pinKeveres();
+        } else {
+            alapAllapot();
+        }
+        //System.out.println(gombok[0].getText());
+    }//GEN-LAST:event_shuffleCheckBoxStateChanged
+
+    private void alapAllapot() {
+        Color alapHatter = new Color(70,73,75);
         for (int i = 0; i < gombok.length; i++) {
             gombok[i] = new JButton(pinSzamok[i]);
-            amobaPanel.add(gombok[i]);
-            System.out.println("beadom");
+            gombok[i].setBackground(alapHatter);
+        }
+        kodTextfield.setText("");
+        //System.out.println("alap");
+    }
+
+    private void pinKeveres() {
+        //System.out.println("kevert");
+        ArrayList<String> keveresLista = new ArrayList<>();
+        for (int i = 0; i < gombok.length; i++) {
+            keveresLista.add(pinSzamok[i]);
+        }
+        Collections.shuffle(keveresLista);
+        for (int i = 0; i < gombok.length; i++) {
+            gombok[i].setText(keveresLista.get(i));
         }
     }
+    class GombLenyomas implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            JButton gomb = (JButton)e.getSource();
+            kodTextfield.setText(kodTextfield.getText()+gomb.getText());
+            gomb.setBackground(Color.CYAN);
+        }
+            
+        
+    }
+        
+    
+
+    private void pinGombGenralas() {
+        for (int i = 0; i < gombok.length; i++) {
+            gombok[i] = new JButton(pinSzamok[i]);
+            gombok[i].addActionListener(new GombLenyomas());
+            pinPanel.add(gombok[i]);
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel amobaPanel;
     private javax.swing.JPanel amobaSettingsPanel;
     private javax.swing.JPanel bejelntkezesPanel;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel jatekPanel;
     private javax.swing.JTextField kodTextfield;
